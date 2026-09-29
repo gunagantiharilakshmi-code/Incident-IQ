@@ -184,18 +184,34 @@ The architecture separates Incident IQ's application workflow from the long-term
 The boundary is conceptually:
 
 ```text
-Incident IQ
-    |
-    | incident + resolution + post-mortem
-    v
-Persistent agent memory
-    |
-    | relevant historical experience
-    v
-Investigation agent
-    |
-    v
-Recommendation / runbook
+                                                 INCIDENT IQ
+                                                       │
+                                        ┌──────────────┴──────────────┐
+                                        │                             │
+                        │    Application Data                        AI Agent
+                                        │                              │
+                                   PostgreSQL                       Hindsight
+                                        │                              │
+                                 ┌──────┼─────────┐           ┌────────┼─────────┐
+                                 │      │         │           │        │         │
+                              Users  Incidents Runbooks   Memories  Experiences  Lessons
+                                │      │         │            │        │         │
+                                └──────┴─────────┘            └────────┴─────────┘
+                                        │                             │
+                                        └──────────────┬──────────────┘
+                                                       ↓
+                                                      LLM
+                                                       ↓
+                                             Incident Investigation
+                                                       ↓
+                                               Recommendations
+                                                       ↓
+                                                  Resolution
+                                                       ↓
+                                                 Post-Mortem
+                                                       ↓
+                                                Hindsight Memory
+                                                       ↺
 ```
 
 The current repository already has the structure needed for this boundary through `AgentMemoryEntry`. The persistent implementation can use that structure rather than turning the application into one large collection of chat transcripts.
@@ -315,37 +331,7 @@ Incident IQ captures the root cause, resolution notes, runbook used, failed appr
 The resulting loop is:
 
 ```text
-Incident
-   ↓
-Investigation
-   ↓
-Historical evidence
-   ↓
-Runbook / recovery
-   ↓
-Resolution
-   ↓
-Post-mortem
-   ↓
-Persistent memory
-   ↓
-Future incident
-```
-
-The post-mortem is therefore not just documentation.
-
-It is the structured point where the system can turn an operational event into knowledge that can influence a later investigation.
-
-## A concrete example
-
-Consider a payment service returning errors during checkout.
-
-The engineer reports:
-
-```text
-Customers on the checkout page are seeing 500 Internal Error
-and cards are failing to charge. The payment webhook queue has
-over 200 pending transactions.
+INCIDENT IQ │ ┌──────────────┴──────────────┐ │ │ Application Data AI Agent │ │ PostgreSQL Hindsight │ │ ┌──────┼─────────┐ ┌────────┼─────────┐ │ │ │ │ │ │ Users Incidents Runbooks Memories Experiences Lessons │ │ │ │ │ │ └──────┴─────────┘ └────────┴─────────┘ │ │ └──────────────┬──────────────┘ ↓ LLM ↓ Incident Investigation ↓ Recommendations ↓ Resolution ↓ Post-Mortem ↓ Hindsight Memory ↺
 ```
 
 Incident IQ can compare that description with its historical memory.
