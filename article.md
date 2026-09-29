@@ -10,8 +10,6 @@ The application models that memory explicitly, with a persistent memory boundary
 
 <img width="1220" height="707" alt="Screenshot 2026-09-29 052201" src="https://github.com/user-attachments/assets/84b86848-81e6-40d1-acc6-fdd9c2238b78" />
 
-![Incident IQ architecture](incident-iq-assets/incident-iq-architecture.png)
-
 *Figure 1 — The Incident IQ flow: incident intake → investigation → historical memory → recommended recovery → resolution → reusable memory.*
 
 ## What Incident IQ actually does
@@ -44,11 +42,12 @@ export interface Incident {
 
 That gives the agent something much more useful than a blank prompt.
 
-![Incident IQ dashboard](incident-iq-assets/dashboard.png)
+<img width="1200" height="705" alt="Screenshot 2026-09-29 052228" src="https://github.com/user-attachments/assets/4235f05e-bad7-45bd-855f-dabe5cff76f4" />
+
 
 *Figure 2 — Incident IQ dashboard with active incidents, critical priority, AI investigations, and resolved incidents.*
 
-![Incident feed](incident-iq-assets/dashboard-incidents.png)
+<img width="1210" height="702" alt="Screenshot 2026-09-29 052254" src="https://github.com/user-attachments/assets/22a349de-a6ad-4f5c-9957-be42ae9571db" />
 
 *Figure 3 — The incident feed with severity, service, status, investigation controls, and access to past fixes.*
 
@@ -60,7 +59,7 @@ The repository includes test presets for payment, database, API, and mobile inci
 
 That makes the investigation flow easy to demonstrate without pretending the engineer already knows the root cause.
 
-![Report an incident](incident-iq-assets/report-incident.png)
+<img width="1201" height="691" alt="Screenshot 2026-09-29 052315" src="https://github.com/user-attachments/assets/59520e4f-ca7f-464f-8faa-077f50c54b01" />
 
 *Figure 4 — Incident intake: the engineer describes what happened in plain language and provides the minimum context needed for investigation.*
 
@@ -226,7 +225,7 @@ I don't only want to remember what happened. I want to remember what worked, wha
 
 That is the distinction I find useful when thinking about [agent memory](https://vectorize.io/what-is-agent-memory).
 
-![Agent long-term memory](incident-iq-assets/agent-memory.png)
+<img width="1211" height="706" alt="Screenshot 2026-09-29 052405" src="https://github.com/user-attachments/assets/14fa485f-3438-41aa-8598-9efbb5816a1a" />
 
 *Figure 6 — Agent Memory stores the incident patterns the agent can retrieve later: root causes, successful fixes, and reuse history.*
 
@@ -271,7 +270,7 @@ export interface RunbookStep {
 
 That means a recommendation can point to an actual recovery procedure rather than producing a paragraph of generic advice.
 
-![Fixing guides and runbooks](incident-iq-assets/runbooks.png)
+<img width="1217" height="698" alt="Screenshot 2026-09-29 052425" src="https://github.com/user-attachments/assets/c52365ad-d62e-43c9-b714-fb3d1c71e424" />
 
 *Figure 7 — Fixing Guides (runbooks) provide ordered recovery procedures that can be referenced during investigation.*
 
