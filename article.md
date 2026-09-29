@@ -8,6 +8,8 @@ That is the idea behind Incident IQ: an incident-response agent that uses histor
 
 The application models that memory explicitly, with a persistent memory boundary designed around [Hindsight](https://github.com/vectorize-io/hindsight).
 
+<img width="1220" height="707" alt="Screenshot 2026-09-29 052201" src="https://github.com/user-attachments/assets/84b86848-81e6-40d1-acc6-fdd9c2238b78" />
+
 ![Incident IQ architecture](incident-iq-assets/incident-iq-architecture.png)
 
 *Figure 1 — The Incident IQ flow: incident intake → investigation → historical memory → recommended recovery → resolution → reusable memory.*
